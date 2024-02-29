@@ -1,8 +1,9 @@
 from typing import List
 
+
 class MinHeap:
     def __init__(self):
-        self.heap = [0] # ignore first element
+        self.heap = [0]  # ignore first element
 
     # O(logn)
     def push(self, val: int) -> None:
@@ -12,7 +13,8 @@ class MinHeap:
         # move up to the proper position
         while index > 1 and self.heap[index // 2] > self.heap[index]:
             # swap
-            self.heap[index], self.heap[index//2] = self.heap[index//2], self.heap[index]
+            self.heap[index], self.heap[index //
+                                        2] = self.heap[index//2], self.heap[index]
             index = index // 2
 
     # O(logn)
@@ -32,13 +34,13 @@ class MinHeap:
         return root
 
     def _bubble_down(self, index) -> None:
-        child = 2 * index # left
+        child = 2 * index  # left
         while child < len(self.heap):
             # choose right
             if child+1 < len(self.heap) and self.heap[child+1] < self.heap[child]:
                 child += 1
 
-            if self.heap[child] >= self.heap[index]: # proper position
+            if self.heap[child] >= self.heap[index]:  # proper position
                 break
 
             # swap
@@ -55,5 +57,5 @@ class MinHeap:
         self.heap = [0] + nums
 
         # build from bottom, bubble down every element
-        for i in reversed(range(1, len(self.heap) // 2+1)): # start from last parent
+        for i in reversed(range(1, len(self.heap) // 2+1)):  # start from last parent
             self._bubble_down(i)
