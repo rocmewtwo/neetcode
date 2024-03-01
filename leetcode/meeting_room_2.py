@@ -2,6 +2,27 @@ import heapq
 from typing import List
 
 
+def minMeetingRooms3(intervals: List[int]) -> int:
+    # two pointer
+    start = sorted([i[0] for i in intervals])
+    end = sorted([i[1] for i in intervals])
+
+    res, count = 0, 0
+    s, e = 0, 0
+
+    while s < len(intervals):
+        if start[s] < end[e]:
+            s += 1
+            count += 1
+        else:
+            e += 1
+            count -= 1
+
+        res = max(res, count)
+
+    return res
+
+
 def minMeetingRooms2(intervals: List[int]) -> int:
     # scan: start + 1, end - 1
     time = []
@@ -38,8 +59,11 @@ def minMeetingRooms(intervals: List[int]) -> int:
     return len(heap)
 
 
+# intervals = [(0, 40), (5, 10), (15, 20)]
 intervals = [(0, 10), (10, 20), (20, 30), (30, 40), (40, 50), (50, 60), (60, 70), (70, 80),
              (80, 90), (90, 100), (0, 100), (10, 90), (20, 80), (30, 70), (40, 60), (50, 50)]
 
+
 print(minMeetingRooms(intervals))
 print(minMeetingRooms2(intervals))
+print(minMeetingRooms3(intervals))
