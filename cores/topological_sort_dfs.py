@@ -27,6 +27,7 @@ class Graph:
                 if not dfs(adj_node):
                     return False  # cycle detected
 
+            # post order: add last
             top_sort.append(node)
             visited.add(node)
             path.remove(node)  # back
