@@ -7,12 +7,11 @@ def merge(arr, l, m, r):  # merge in-place
     while i < len(arr1) and j < len(arr2):
         if arr1[i] <= arr2[j]:
             arr[k] = arr1[i]
-            k += 1
             i += 1
         else:
             arr[k] = arr2[j]
-            k += 1
             j += 1
+        k += 1
 
     while i < len(arr1):
         arr[k] = arr1[i]
@@ -26,7 +25,7 @@ def merge(arr, l, m, r):  # merge in-place
 
 
 def merge_sort(arr, l, r):
-    if l == r:
+    if r <= l:
         return arr
 
     # split
