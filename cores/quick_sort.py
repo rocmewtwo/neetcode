@@ -1,36 +1,28 @@
-'''
-    base case if end <= start
-
-    pick up right most element as a pivot
-    move left pointer to pivot-1
-    partition left and right, left < pivot, right > pivot
-    swap pivot and left
-
-    recursion 0 - left -1
-    recursion left + 1, end
-'''
+import random
 
 
-def quick_sort(arr: list[int], s: int, e: int):
-    # s: start index, e: end index
-    if e <= s:  # base case: single element
+def quick_sort(arr, l, r):
+    if r <= l:
         return
 
-    pivot = arr[e]
-    left = s  # point left part smaller than pivot
+    # random pick pivot and swap to right
+    p = random.randrange(l, r)
+    arr[r], arr[p] = arr[p], arr[r]
+
+    pivot = arr[r]
+    k = l  # swaping position
 
     # Partition: elements smaller than pivot on left side
-    for i in range(s, e):
+    for i in range(l, r):
         if arr[i] < pivot:
-            arr[i], arr[left] = arr[left], arr[i]
-            left += 1
+            arr[i], arr[k] = arr[k], arr[i]
+            k += 1
 
-    # swap end(pivot) and left, move pivot in-between left & right sides
-    arr[e] = arr[left]
-    arr[left] = pivot
+    # swap pivot
+    arr[k], arr[r] = arr[r], arr[k]
 
-    quick_sort(arr, s, left - 1)
-    quick_sort(arr, left + 1, e)
+    quick_sort(arr, l, k - 1)
+    quick_sort(arr, k + 1, r)
 
 
 arr = [6, 2, 4, 1, 3]
