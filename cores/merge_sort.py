@@ -25,6 +25,8 @@ def merge(arr, l, m, r):  # merge in-place
 
 
 def merge_sort(arr, l, r):
+    # time: O(nlogn)
+
     if r <= l:
         return arr
 

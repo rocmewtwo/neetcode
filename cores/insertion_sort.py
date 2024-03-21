@@ -14,6 +14,8 @@ class Pair:
 
 
 def insertion_sort(pairs: List[Pair]):
+    # time: O(n^2)
+
     for i in range(len(pairs)):
         j = i - 1
         while (j >= 0 and pairs[j + 1] < pairs[j]):

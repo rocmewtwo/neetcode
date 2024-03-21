@@ -2,6 +2,8 @@ import random
 
 
 def quick_sort(arr, l, r):
+    # time O(nlogn), worse case O(n^2)
+
     if r <= l:
         return
 
