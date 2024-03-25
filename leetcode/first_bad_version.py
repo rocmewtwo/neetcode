@@ -5,11 +5,11 @@ class Solution:
     def firstBadVersion(self, n: int) -> int:
         l, r = 1, n
 
-        while l < r:  # stop at l == r: point to the first bad version
+        while l <= r:
             mid = (l + r) // 2
             if isBadVersion(mid):
-                r = mid  # stay r pointer to bad version
+                r = mid - 1
             else:
-                l = mid + 1  # if good version, move left pointer + 1
+                l = mid + 1
 
         return l
