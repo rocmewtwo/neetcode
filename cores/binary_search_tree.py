@@ -16,28 +16,32 @@ def insert(root: Node, val):
     return root
 
 
-def remove(root: Node, val):
-    if not root:
+def remove(curr: Node, val):
+    if not curr:
         return None
 
-    if val > root.val:
-        root.right = remove(root.right, val)
-    elif val < root.val:
-        root.left = remove(root.left, val)
+    if val > curr.val:
+        curr.right = remove(curr.right, val)
+    elif val < curr.val:
+        curr.left = remove(curr.left, val)
     else:
         # case 1: 0 or 1 child
         # case 2: 2 children
-        if not root.left:
-            return root.right
-        elif not root.right:
-            return root.left
+        if not curr.left:
+            return curr.right
+        elif not curr.right:
+            return curr.left
         else:
             # find the min node in right subtree
-            min_node = find_min_node(root.right)
-            root.val = min_node.val
-            root.right = remove(root.right, min_node.val)
+            # min_node = find_min_node(curr.right)
+            min_node = curr.right
+            while min_node and min_node.left:
+                min_node = min_node.left
 
-    return root
+            curr.val = min_node.val
+            curr.right = remove(curr.right, min_node.val)
+
+    return curr
 
 
 def inorder(root: Node):
@@ -92,14 +96,14 @@ def find_min_node(root: Node) -> Node:
 
 
 if __name__ == "__main__":
-    root = Node(50)
-
-    insert(root, 30)
-    insert(root, 20)
-    insert(root, 40)
-    insert(root, 70)
-    insert(root, 60)
-    insert(root, 80)
+    root = None
+    root = insert(root, 50)
+    root = insert(root, 30)
+    root = insert(root, 20)
+    root = insert(root, 40)
+    root = insert(root, 70)
+    root = insert(root, 60)
+    root = insert(root, 80)
 
     print(inorder_list(root))
     min_node = find_min_node(root)
