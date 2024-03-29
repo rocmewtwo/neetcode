@@ -2,11 +2,11 @@ import heapq
 
 
 def heap_sort(arr):
-    # time: O(nlogn)
-    heapq.heapify(arr)
+    # time: O(n + nlogn) = O(nlogn)
+    heapq.heapify(arr)  # O(n)
     res = []
-    while arr:
-        res.append(heapq.heappop(arr))
+    while arr:  # n elements
+        res.append(heapq.heappop(arr))  # O(logn)
     return res
 
 
