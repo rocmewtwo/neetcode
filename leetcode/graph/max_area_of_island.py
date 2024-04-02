@@ -6,23 +6,21 @@ from typing import List
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         ROWS, COLS = len(grid), len(grid[0])
-        visit, path = set(), set()
+        visit = set()
         max_area = 0
 
         # return area
         def dfs(r, c) -> int:
             if (r < 0 or c < 0 or r == ROWS or c == COLS or
-                    (r, c) in visit or (r, c) in path or grid[r][c] == 0):
+                    (r, c) in visit or grid[r][c] == 0):
                 return 0
 
             area = 1
             visit.add((r, c))
-            path.add((r, c))
             area += dfs(r - 1, c)
             area += dfs(r + 1, c)
             area += dfs(r, c - 1)
             area += dfs(r, c + 1)
-            path.remove((r, c))  # back
 
             return area
 
