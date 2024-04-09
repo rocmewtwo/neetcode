@@ -12,24 +12,22 @@ class Graph:
     def topological_sort(self):
         top_sort = []
         visited = set()
-        path = set()  # dfs visiting path (used to detch cycle)
+        path = set()  # dfs visiting path (used to detect cycle)
 
         def dfs(node: int) -> bool:
-            if node in visited:
-                return True
             if node in path:
                 return False  # cycle detected
 
-            path.add(node)
+            if node in visited:
+                return True
 
-            # visit
-            for adj_node in self.adj[node]:
-                if not dfs(adj_node):
+            path.add(node)
+            visited.add(node)
+            for nei in self.adj[node]:
+                if not dfs(nei):
                     return False  # cycle detected
 
-            # post order: add last
-            top_sort.append(node)
-            visited.add(node)
+            top_sort.append(node)  # post order: add last
             path.remove(node)  # back
 
             return True
@@ -54,6 +52,6 @@ if __name__ == "__main__":
     print(g.adj)
     print(g.topological_sort())
 
-    # g.add_edge(1, 2)  # create cycle
-    # print(g.adj)
-    # g.topological_sort()
+    g.add_edge(1, 2)  # create cycle
+    print(g.adj)
+    print(g.topological_sort())
