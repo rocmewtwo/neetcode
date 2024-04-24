@@ -62,6 +62,10 @@ class Solution:
             res.append([name] + sorted(emails))
         return res
 
+    # N: number of accounts
+    # K: max number of emails per user
+    # time: O(NK) * N logK -> O(N * K * N * logK)
+    # space: O(NK)
     def dfs_merge(self, accounts: List[List[str]]) -> List[List[str]]:
         adj_list = defaultdict(set)
         email_to_name = {}

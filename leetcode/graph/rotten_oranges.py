@@ -34,6 +34,7 @@ class Solution:
                         continue
                     rotten.append((nr, nc))
                     # we can reduce space instead using visit we change input to 2
+                    # grid[r][c] = 2
                     visit.add((nr, nc))
                     fresh -= 1
             minutes += 1
