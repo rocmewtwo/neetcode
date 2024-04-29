@@ -1,3 +1,4 @@
+import bisect
 from typing import List
 
 
@@ -16,16 +17,18 @@ class Solution:
             if nums[i] > ans[-1]:
                 ans.append(nums[i])
             else:
-                # find smallest element >= nums[i]
-                l = 0
-                r = len(ans) - 1
-                while l < r:
-                    m = (l + r) // 2  # (r - l) // 2 + l
-                    if nums[i] > ans[m]:  # target in m+1 to r
-                        l = m + 1
-                    else:  # num <= mid, target in l to m
-                        r = m
+                l = bisect.bisect_left(ans, nums[i])
+                # # find smallest element >= nums[i]
+                # l = 0
+                # r = len(ans)
+                # while l < r:
+                #     m = (l + r) // 2  # (r - l) // 2 + l
+                #     if nums[i] > ans[m]:  # target in m+1 to r
+                #         l = m + 1
+                #     else:  # num <= mid, target in l to m
+                #         r = m
                 ans[l] = nums[i]
+
             max_len = max(max_len, len(ans))
         # print(ans)
         return len(ans)
