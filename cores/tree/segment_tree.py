@@ -47,11 +47,13 @@ class SegmentTree:
 
     def query_range(self, root: Node, L: int, R: int):
         if L > root.R or R < root.L:  # query range out boundary
+            print(f"{L=} {R=} {root.L=} {root.R=} 0")
             return 0
 
         # case1: range is bigger and includes the whole array -> return total sum of array
         # case2: range is exactly the total array
         if L <= root.L and R >= root.R:
+            print(f"{L=} {R=} {root.L=} {root.R=} {root.sum=}")
             return root.sum
 
         return self.query_range(root.left, L, R) + self.query_range(root.right, L, R)
@@ -60,4 +62,7 @@ class SegmentTree:
 if __name__ == "__main__":
     tree = SegmentTree([1, 2, 3, 4, 5])
 
-    print(tree.query(0, 4))
+    # print(tree.query(0, 4))
+    # print(tree.query(2, 4))
+    print(tree.query(1, 3))
+    print(tree.query(-1, 10))  # range covery whole array
