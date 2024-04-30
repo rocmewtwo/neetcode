@@ -13,7 +13,6 @@ class Node:
 def inorder(root):
     stack = []
     curr: Node = root
-    res = []
 
     while curr or stack:
         if curr:
