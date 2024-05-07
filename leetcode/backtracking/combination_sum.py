@@ -1,4 +1,6 @@
 # 39. Combination Sum
+# https://leetcode.com/problems/combination-sum/
+
 from typing import List
 
 
@@ -6,21 +8,21 @@ class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
 
-        def dfs(i, subset, total):
+        def dfs(i, cur_comb, total):
             if total == target:
-                res.append(subset.copy())
+                res.append(cur_comb.copy())
                 return
 
             if i == len(candidates) or total > target:
                 return
 
-            # not choose i
-            dfs(i + 1, subset, total)
-
             # choose i
-            subset.append(candidates[i])
-            dfs(i, subset, total + candidates[i])
-            subset.pop()
+            cur_comb.append(candidates[i])
+            dfs(i, cur_comb, total + candidates[i])
+            cur_comb.pop()
+
+            # not choose i
+            dfs(i + 1, cur_comb, total)
 
         dfs(0, [], 0)
         return res
