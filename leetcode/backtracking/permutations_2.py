@@ -2,12 +2,38 @@
 # https://leetcode.com/problems/permutations-ii/description/
 
 from typing import List
+from collections import Counter
 
 
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-        return self.remaining_permute(nums)
-        return self.choosed_set_permute(nums)
+        return self.counter_permute(nums)
+        # return self.remaining_permute(nums)
+        # return self.choosed_set_permute(nums)
+
+    def counter_permute(self, nums: List[int]) -> List[List[int]]:
+        res, perm = [], []
+
+        # counter condense array to prevent choose duplicate number
+        counter = Counter(nums)
+        # counter = {n: 0 for n in nums}
+        # for n in nums:
+        #     counter[n] += 1
+
+        def dfs():
+            if len(perm) == len(nums):
+                res.append(perm.copy())
+                return
+
+            for n in counter:
+                if counter[n] > 0:
+                    perm.append(n)
+                    counter[n] -= 1
+                    dfs()
+                    counter[n] += 1
+                    perm.pop()
+        dfs()
+        return res
 
     def remaining_permute(self, nums: List[int]) -> List[List[int]]:
         res = []
