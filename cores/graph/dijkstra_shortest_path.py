@@ -4,6 +4,9 @@ from typing import Dict, List
 
 
 class Solution:
+    # worse case E = V^2
+    # E*logE = E*logV^2 = 2E*logV = E*logV
+    # time: O(E * logV) or O(E * logE)
     def shortestPath(self, n: int, edges: List[List[int]], src: int) -> Dict[int, int]:
         # build adj list
         adj = defaultdict(list)
