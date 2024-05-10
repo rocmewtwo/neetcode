@@ -13,6 +13,12 @@ class Solution:
         people.sort(key=lambda x: (-x[0], x[1]))
         res = []
 
+        # print(people)
         for p in people:
             res.insert(p[1], p)
+            # print(res, p)
         return res
+
+
+s = Solution()
+print(s.reconstructQueue([[7, 0], [4, 4], [7, 1], [5, 0], [6, 1], [5, 2]]))
