@@ -1,7 +1,7 @@
 class UnionFind:
     def __init__(self, n: int):
         self.parent = [i for i in range(n)]
-        self.rank = [0 for i in range(n)]
+        self.rank = [1 for i in range(n)]
         self.num_components = n
 
     def find(self, x: int) -> int:

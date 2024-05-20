@@ -7,7 +7,7 @@ from typing import List
 class UnionFind():
     def __init__(self, n):
         self.parent = [i for i in range(n)]
-        self.rank = [0 for i in range(n)]
+        self.rank = [1 for i in range(n)]
 
     def find(self, n1):
         while n1 != self.parent[n1]:
@@ -24,7 +24,7 @@ class UnionFind():
             self.rank[p1] += self.rank[p2]
         else:
             self.parent[p2] = p1
-            self.rank[p2] = p1
+            self.rank[p2] += self.rank[p1]
         return True
 
 

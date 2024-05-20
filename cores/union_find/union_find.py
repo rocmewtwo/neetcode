@@ -7,7 +7,7 @@ class UnionFind:
 
         for i in range(size):
             self.parent[i] = i
-            self.rank[i] = 0
+            self.rank[i] = 1
 
     # Union by height / rank.
     # Return false if already connected, true otherwise.
@@ -20,11 +20,10 @@ class UnionFind:
 
         if self.rank[p1] > self.rank[p2]:
             self.parent[p2] = p1
-        elif self.rank[p1] < self.rank[p2]:
-            self.parent[p1] = p2
+            self.rank[p1] += self.rank[p2]
         else:
-            self.parent[p2] = p1
-            self.rank[p1] += 1
+            self.parent[p1] = p2
+            self.rank[p2] += self.rank[p1]
         return True
 
     # Find parent of n, with path compression.

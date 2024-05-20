@@ -8,7 +8,7 @@ from typing import List
 class UnionFind:
     def __init__(self, size):
         self.parent = [i for i in range(size)]
-        self.rank = [0] * size
+        self.rank = [1] * size
 
     def find(self, n1) -> int:
         p = self.parent[n1]
