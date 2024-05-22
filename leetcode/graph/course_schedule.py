@@ -1,6 +1,9 @@
 from typing import List
 
 
+# Union-Find cycle detection works for undirected graphs.
+# Topological Sort cycle detection works for directed graph.
+# This problem is directed graph, we can't use union find
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         adj_list = {}

@@ -1,5 +1,8 @@
 from collections import defaultdict
 
+# Given a directed acyclical graph, return a valid
+# topological ordering of the graph.
+
 
 class Graph:
     def __init__(self, n) -> None:
