@@ -41,7 +41,7 @@ class SegmentTree:
         elif R <= M:
             return self.left.range_query(L, R)
         else:
-            return max(self.left.range_query(L, R), self.right.range_query(L, R))
+            return max(self.left.range_query(L, M), self.right.range_query(M + 1, R))
 
 
 nums = [1, 2, 3, 4, 5]
