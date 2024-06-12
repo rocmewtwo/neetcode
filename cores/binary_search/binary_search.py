@@ -4,6 +4,22 @@ from typing import List
 def binary_search(arr: List[int], target: int) -> int:
     l, r = 0, len(arr) - 1
 
+    while l < r:
+        m = (l + r) // 2
+
+        if target == arr[m]:
+            return m
+        elif target > arr[m]:
+            l = m + 1
+        else:
+            r = m
+
+    return -1
+
+
+def binary_search2(arr: List[int], target: int) -> int:
+    l, r = 0, len(arr) - 1
+
     while l <= r:
         m = (l + r) // 2
         # m = l + ((r - l) // 2) # if l and r are very large, other language will have overflow.
@@ -20,3 +36,5 @@ def binary_search(arr: List[int], target: int) -> int:
 arr = [1, 3, 3, 4, 5, 6, 7, 8]  # sorted array
 print(binary_search(arr, 6))
 print(binary_search(arr, 2))
+print(binary_search2(arr, 6))
+print(binary_search2(arr, 2))
