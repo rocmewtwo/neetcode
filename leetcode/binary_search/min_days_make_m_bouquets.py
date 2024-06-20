@@ -6,6 +6,7 @@ from typing import List
 
 
 class Solution:
+    # time: O(nlogMax(bloomDay))
     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
         def get_bouquets(day):
             count = 0
