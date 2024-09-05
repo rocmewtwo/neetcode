@@ -20,7 +20,7 @@ cases:
     (b / c) + a == b / c + a, yes
 
 -
-    a - (b + c) == a - b - c, yes
+    a - (b + c) != a - b + c, no #####
     a - (b * c) == a - b * c, yes
     a - (b - c) != a - b - c, no #####
     a - (b / c) == a - b / c, yes
@@ -55,7 +55,8 @@ cases:
 
 
 def can_remove(left_sign, right_sign, has_plus, has_minus):
-    if (left_sign == '-' and has_minus
+    if (left_sign == '-' and has_plus
+            or right_sign == '-' and has_minus
             or left_sign == '*' and has_plus
             or right_sign == '*' and has_plus
             or right_sign == '*' and has_minus
@@ -89,6 +90,7 @@ def remove_parentheses(expression) -> str:
     # print(right_sign)
 
     stack = []
+    checked = [False] * len(expression)  # to avoid recount inner parentheses
     for i in range(len(expression)):
         if expression[i] == '(':
             stack.append(i)
@@ -97,6 +99,10 @@ def remove_parentheses(expression) -> str:
 
             has_plus, has_minus = [False] * 2
             for j in range(l + 1, r):
+                if checked[j]:
+                    continue
+
+                checked[j] = True
                 if expression[j] == '+':
                     has_plus = True
                 elif expression[j] == '-':
@@ -122,3 +128,7 @@ def remove_parentheses(expression) -> str:
 print(remove_parentheses("1*(2+(3*(4+5)))"))  # Output: "1*(2+3*(4+5))"
 print(remove_parentheses("2 + (3 / -5)"))     # Output: "2 + 3 / -5"
 print(remove_parentheses("x+(y+z)+(t+(v+w))"))  # Output: "x+y+z+t+v+w"
+print(remove_parentheses("-2-(2+3)"))  # Output: "-2-(2+3)"
+print(remove_parentheses("-(2+3)"))  # Output: "-(2+3)"
+print(remove_parentheses("(2*(3+4)*5)/6"))  # Output: "2*(3+4)*5/6"
+print(remove_parentheses("(-5)/7"))  # Output: "-5/7"
