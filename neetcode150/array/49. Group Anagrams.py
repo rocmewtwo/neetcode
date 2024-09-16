@@ -36,7 +36,8 @@ class Solution:
         return group.values()
 
 
-s = Solution()
-# Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
-print(s.groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
-print(s.groupAnagrams([""]))  # Output: [[""]]
+if __name__ == "__main__":
+    s = Solution()
+    # Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+    print(s.groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+    print(s.groupAnagrams([""]))  # Output: [[""]]

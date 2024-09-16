@@ -31,16 +31,17 @@ class Solution:
         return result
 
 
-s = Solution()
-root = TreeNode(3, TreeNode(1, TreeNode(3)),
-                TreeNode(4, TreeNode(1), TreeNode(5)))
-print(s.goodNodes(root))  # 4
+if __name__ == "__main__":
+    s = Solution()
+    root = TreeNode(3, TreeNode(1, TreeNode(3)),
+                    TreeNode(4, TreeNode(1), TreeNode(5)))
+    print(s.goodNodes(root))  # 4
 
-root = TreeNode(3, TreeNode(3, TreeNode(4), TreeNode(2)))
-print(s.goodNodes(root))  # 3
+    root = TreeNode(3, TreeNode(3, TreeNode(4), TreeNode(2)))
+    print(s.goodNodes(root))  # 3
 
-root = TreeNode(1)
-print(s.goodNodes(root))  # 1
+    root = TreeNode(1)
+    print(s.goodNodes(root))  # 1
 
-root = TreeNode(2, TreeNode(4), TreeNode(3))
-print(s.goodNodes(root))  # 3
+    root = TreeNode(2, TreeNode(4), TreeNode(3))
+    print(s.goodNodes(root))  # 3

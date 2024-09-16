@@ -58,12 +58,13 @@ class Solution:
         return res
 
 
-s = Solution()
-print(s.reverse(123))  # 321
-print(s.reverse(-123))  # -321
-print(s.reverse(120))  # 21
-print(s.reverse(-12))  # -21
-print(s.reverse(0))  # 0
-print(s.reverse(1534236469))  # 0
-print(s.reverse(-2147483648))  # 0
-print(s.reverse(1563847412))  # 0
+if __name__ == "__main__":
+    s = Solution()
+    print(s.reverse(123))  # 321
+    print(s.reverse(-123))  # -321
+    print(s.reverse(120))  # 21
+    print(s.reverse(-12))  # -21
+    print(s.reverse(0))  # 0
+    print(s.reverse(1534236469))  # 0
+    print(s.reverse(-2147483648))  # 0
+    print(s.reverse(1563847412))  # 0
