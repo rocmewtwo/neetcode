@@ -1,32 +1,31 @@
-import timeit
-
-
 # time: O(2^n), space: O(n) for n recursive stack
-def brute_force(profit, weight, capacity):
-    def dfs(i, capacity):
+def brute_force(profit, weight, capacity) -> int:
+    def dfs(i, capacity) -> int:
         if i == len(profit):
             return 0
 
         # not choose i
-        not_choose_profit = dfs(i + 1, capacity)
+        max_profit = dfs(i + 1, capacity)
 
         # choose i
-        choose_profit = 0
-        if capacity - weight[i] >= 0:
-            choose_profit = dfs(i + 1, capacity - weight[i]) + profit[i]
+        new_capacity = capacity - weight[i]
+        if new_capacity >= 0:
+            choose_profit = profit[i] + dfs(i + 1, new_capacity)
+            max_profit = max(max_profit, choose_profit)
 
-        return max(not_choose_profit, choose_profit)
+        return max_profit
 
     return dfs(0, capacity)
 
 
-# time: O(n * m), space: O(n * m)
-def memorization(profit, weight, capacity):
-    # two variables: current position i and current capacity
+# time: O(n * m), space: O(n * m), where n is the number of items, m is the capacity
+# maximum number of states: n * capacity
+# caching: current position i and current capacity
+def memorization(profit, weight, capacity) -> int:
     N, M = len(profit), capacity
     dp = [[-1] * (M + 1) for _ in range(N)]  # [i][capacity]
 
-    def dfs(i, capacity):
+    def dfs(i, capacity) -> int:
         if i == len(profit):
             return 0
 
@@ -34,21 +33,22 @@ def memorization(profit, weight, capacity):
             return dp[i][capacity]
 
         # not choose i
-        not_choose_profit = dfs(i + 1, capacity)
+        max_profit = dfs(i + 1, capacity)
 
         # choose i
-        choose_profit = 0
-        if capacity - weight[i] >= 0:
-            choose_profit = dfs(i + 1, capacity - weight[i]) + profit[i]
+        new_capacity = capacity - weight[i]
+        if new_capacity >= 0:
+            choose_profit = profit[i] + dfs(i + 1, new_capacity)
+            max_profit = max(max_profit, choose_profit)
 
-        dp[i][capacity] = max(not_choose_profit, choose_profit)
+        dp[i][capacity] = max_profit
         return dp[i][capacity]
 
     return dfs(0, capacity)
 
 
 # Time: O(n * m), Space: O(n * m)
-def bottom_up_dp(profit, weight, capacity):
+def bottom_up_dp(profit, weight, capacity) -> int:
     N, M = len(profit), capacity
     dp = [[0] * (M + 1) for _ in range(N)]  # [item][capacity]
 
@@ -70,7 +70,7 @@ def bottom_up_dp(profit, weight, capacity):
 
 
 # Time: O(n * m), Space: O(m)
-def buttom_up_dp_memory_optimization(profit, weight, capacity):
+def buttom_up_dp_memory_optimization(profit, weight, capacity) -> int:
     N, M = len(profit), capacity
     dp = [0] * (M + 1)  # [capacity]
 
