@@ -25,3 +25,11 @@ class Solution:
 
         dfs(0, 0, "")
         return res
+
+
+if __name__ == "__main__":
+    s = Solution()
+    # ["((()))","(()())","(())()","()(())","()()()"]
+    print(s.generateParenthesis(3))
+    print(s.generateParenthesis(1))  # ["()"]
+    print(s.generateParenthesis(2))  # ["(())","()()"]
