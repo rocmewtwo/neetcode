@@ -5,10 +5,14 @@
 from typing import List
 
 
-# time complexity: sorting O(nlogn) + traverse cars O(n) = O(nlogn)
-# space complexity: O(n)
 class Solution:
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        # return self.carFleet_stack(target, position, speed)
+        return self.carFleet_save_max(target, position, speed)
+
+    # time complexity: sorting O(nlogn) + traverse cars O(n) = O(nlogn)
+    # space complexity: O(n)
+    def carFleet_stack(self, target: int, position: List[int], speed: List[int]) -> int:
         cars = sorted(zip(position, speed), reverse=True)
         stack = []  # store the car fleet time
 
@@ -20,6 +24,23 @@ class Solution:
             if not stack or time > stack[-1]:
                 stack.append(time)
         return len(stack)
+
+    # save the current max time
+    # if we have bigger time, it means we have new car fleet
+    # time complexity: sorting O(nlogn) + traverse cars O(n) = O(nlogn)
+    # space complexity: O(1)
+    def carFleet_save_max(self, target: int, position: List[int], speed: List[int]) -> int:
+        cars = sorted(zip(position, speed), reverse=True)
+        res = 0
+        cur_max = 0
+
+        for p, s in cars:
+            time = (target - p) / s
+            if time > cur_max:
+                res += 1
+
+            cur_max = max(cur_max, time)
+        return res
 
 
 if __name__ == "__main__":
