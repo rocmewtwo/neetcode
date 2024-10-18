@@ -13,6 +13,10 @@
 # space complexity: O(n)
 class Solution:
     def maximumSwap(self, num: int) -> int:
+        return self.two_pointer_maximumSwap(num)
+        # return self.greedy_maximumSwap(num)
+
+    def greedy_maximumSwap(self, num: int) -> int:
         nums = list(str(num))
         max_index = len(nums) - 1
         cur_max = num
@@ -24,6 +28,20 @@ class Solution:
             if nums[i] > nums[max_index]:
                 max_index = i
         return cur_max
+
+    def two_pointer_maximumSwap(self, num: int) -> int:
+        nums = list(str(num))
+        max_i = len(nums) - 1
+        si, sj = 0, 0
+
+        for i in reversed(range(len(nums))):
+            if nums[i] > nums[max_i]:  # update the current max index
+                max_i = i
+            # if we find a smaller digit, we store the indices of current max and the current value
+            elif nums[i] < nums[max_i]:
+                si, sj = i, max_i
+        nums[si], nums[sj] = nums[sj], nums[si]
+        return int("".join(nums))
 
 
 if __name__ == "__main__":
